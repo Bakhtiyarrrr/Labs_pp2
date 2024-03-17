@@ -57,11 +57,6 @@ while run:
         text_surface = font.render(songs[i], True, black)
         text_rect = text_surface.get_rect(center = (w//2, h//2+10))
         screen.blit(text_surface, text_rect)
-        
-        
-                     
-                     
-            
     pygame.display.flip()
     
     
