@@ -399,22 +399,6 @@ while run:
         elif mouse[0] == 0:
            surface.blit(screen,(0,0))
            cord.clear()
-
-
-
-    
-            
-    
-
-
-
-              
-
-        
-
-
-   
     
     pygame.display.flip()
 pygame.quit()
-"""чтобы рисовать карандашем для каждого цвета я создаю список и через цикл вывожу координаты мыши"""
