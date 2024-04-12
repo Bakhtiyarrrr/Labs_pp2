@@ -117,8 +117,6 @@ while run:
            change_cord_apple = True
         
 
-    
-    
     if once: #once нужен для того чтобы шарик рисовался в одном месте пока змейка не соприкоснется с ним
         apple_rect = apple.get_rect(center = (z,t))
         green_rect = apple_green.get_rect(center = (z,t))

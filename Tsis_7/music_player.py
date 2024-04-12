@@ -24,6 +24,7 @@ pygame.mixer.music.load("Labs_pp2/Tsis_7/for_music_player/songs/" + songs[i])
 pygame.mixer.music.play()
 font = pygame.font.Font(None, 30)
 
+
             
 while run:
     for event in pygame.event.get():
@@ -52,7 +53,23 @@ while run:
                      pygame.mixer.music.load("Labs_pp2/Tsis_7/for_music_player/songs/" + songs[i+1])
                      pygame.mixer.music.play()
                      i = i + 1
+               elif event.key == pygame.K_s:
+                     pygame.mixer.music.load("Labs_pp2/Tsis_7/for_music_player/songs/" + songs[i])
+                     pygame.mixer.music.play()
+                     
+                     
+        if pygame.mixer.music.get_busy() == False:
+            pygame.mixer.music.load("Labs_pp2/Tsis_7/for_music_player/songs/" + songs[i + 1])
+            pygame.mixer.music.play()
+            i = i + 1
+            if i == n - 1:
+               pygame.mixer.music.load("Labs_pp2/Tsis_7/for_music_player/songs/" + songs[0])
+               pygame.mixer.music.play()
+               i = 0
+      
 
+              
+              
         screen.blit(image, rect)
         text_surface = font.render(songs[i], True, black)
         text_rect = text_surface.get_rect(center = (w//2, h//2+10))

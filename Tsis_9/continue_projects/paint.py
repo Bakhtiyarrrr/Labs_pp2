@@ -1,24 +1,32 @@
 import pygame
 import math
 class Draw:
-    def __init__(self,screen):
+    def __init__(self,screen,mouse_x,mouse_y):
         self.screen = screen
+        self.mouse_x = mouse_x
+        self.mouse_y = mouse_y
         self.image_pencil = pygame.image.load("Labs_pp2/Tsis_8/for_paint/pencil.png")
         self.rect_pencil = self.image_pencil.get_rect(center = (25,25))
         # self.image_eraser = pygame.transform.scale(pygame.image.load("Labs_pp2/Tsis_8/for_paint/eraser.png"), (50, 47)) #подстроил размер как у первой картинки
 
         self.image_eraser = pygame.image.load("Labs_pp2/Tsis_8/for_paint/eraser.png")
         self.rect_eraser = self.image_eraser.get_rect(center = (70,26))
+        self.text = font.render(f'{self.mouse_x}, {self.mouse_y}',  True, black)
+        self.text_rect = self.text.get_rect(center = (250,30))
 
     def output(self):
         self.screen.blit(self.image_pencil,self.rect_pencil)
         self.screen.blit(self.image_eraser,self.rect_eraser)
+        pygame.draw.rect(self.screen,white,(200,20,100,30))
+        self.screen.blit(self.text,self.text_rect)
         pygame.draw.rect(self.screen,black,(110,7,15,15))
         pygame.draw.rect(self.screen, gray,(110,35,15,15))
         pygame.draw.rect(self.screen, red,(140,7,15,15))
         pygame.draw.rect(self.screen,green,(140,35,15,15))
         pygame.draw.rect(self.screen,blue,(170,7,15,15))
         pygame.draw.rect(self.screen,yellow,(170,35,15,15))
+        
+        
        
 pygame.init()
 w,h = 700,600
@@ -49,10 +57,16 @@ rhombus = False
 right_triangle = False
 EquilateralTriangle = False
 square = False
+RectangularTrapezoid = False
+pentagon = False
 truth = True
 color = white
 radius = 10
 vertices = []
+font = pygame.font.SysFont('Times New Roman',25)
+mouse_x,mouse_y = 0,0
+clear = False
+ellipse = False
 
 cord = []
 width,height = 0,0
@@ -73,6 +87,10 @@ while run:
                 EquilateralTriangle = False
                 right_triangle = False
                 square = False
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
             elif mouse_x <= 90 and mouse_x > 50 and mouse_y <= 50:
                 pencil = False
                 eraser = True
@@ -83,6 +101,10 @@ while run:
                 EquilateralTriangle = False
                 right_triangle = False
                 square = False
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
 
             if mouse_x <= 120 and mouse_x > 90 and mouse_y <= 25: #условия когда мышка окажется на кнопке черного цвета 
                 pencil_black = True
@@ -141,6 +163,10 @@ while run:
                 EquilateralTriangle = False
                 right_triangle = False
                 square = False
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
             elif event.key == pygame.K_2: # Ромб
                 isosceles_triangle = False
                 rect = False
@@ -151,6 +177,10 @@ while run:
                 EquilateralTriangle = False
                 right_triangle = False
                 square = False
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
             elif event.key == pygame.K_3: # Прямоугольный треугольник
                 right_triangle = True
                 isosceles_triangle = False
@@ -161,6 +191,10 @@ while run:
                 rhombus = False
                 EquilateralTriangle = False
                 square = False
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
             elif event.key == pygame.K_4: # Равносторонний треугольник
                 right_triangle = False
                 isosceles_triangle = False
@@ -171,6 +205,10 @@ while run:
                 rhombus = False
                 square = False
                 EquilateralTriangle = True
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
             elif event.key == pygame.K_5: # Квадрат
                 square = True
                 right_triangle = False
@@ -181,7 +219,11 @@ while run:
                 circle = False
                 rhombus = False
                 EquilateralTriangle = False
-            elif event.key == pygame.K_6:
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
+            elif event.key == pygame.K_6: # Прямоугольник
                 rect = True
                 pencil = False
                 eraser = False
@@ -191,7 +233,11 @@ while run:
                 EquilateralTriangle = False
                 right_triangle = False
                 square = False
-            elif event.key == pygame.K_7:
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
+            elif event.key == pygame.K_7: # Окружность
                 rect = False
                 pencil = False
                 eraser = False
@@ -201,13 +247,75 @@ while run:
                 EquilateralTriangle = False
                 right_triangle = False
                 square = False
+                RectangularTrapezoid = False
+                pentagon = False
+                clear = False
+                ellipse = False
+            elif event.key == pygame.K_8: # Прямоугольная трапеция
+                rect = False
+                pencil = False
+                eraser = False
+                circle = False
+                rhombus = False
+                isosceles_triangle = False
+                EquilateralTriangle = False
+                right_triangle = False
+                square = False
+                RectangularTrapezoid = True
+                pentagon = False
+                clear = False
+                ellipse = False
+            elif event.key == pygame.K_9: # Пятиугольник
+                pentagon = True
+                rect = False
+                pencil = False
+                eraser = False
+                circle = False
+                rhombus = False
+                isosceles_triangle = False
+                EquilateralTriangle = False
+                right_triangle = False
+                square = False
+                RectangularTrapezoid = False
+                clear = False
+                ellipse = False
+            elif event.key == pygame.K_SPACE: # очистить экран
+                clear = True
+                pentagon = False
+                rect = False
+                pencil = False
+                eraser = False
+                circle = False
+                rhombus = False
+                isosceles_triangle = False
+                EquilateralTriangle = False
+                right_triangle = False
+                square = False
+                RectangularTrapezoid = False
+                ellipse = False
+            elif event.key == pygame.K_0:
+                ellipse = True
+                clear = False
+                pentagon = False
+                rect = False
+                pencil = False
+                eraser = False
+                circle = False
+                rhombus = False
+                isosceles_triangle = False
+                EquilateralTriangle = False
+                right_triangle = False
+                square = False
+                RectangularTrapezoid = False
+
 
         
-    draw = Draw(screen)
+    draw = Draw(screen,mouse_x,mouse_y)
     draw.output()
     mouse_x, mouse_y = pygame.mouse.get_pos()
     pos = (mouse_x,mouse_y)
     mouse = pygame.mouse.get_pressed()
+
 
     if pencil_black:
        color = black
@@ -223,7 +331,7 @@ while run:
             color = yellow
 
     if pencil:
-       if mouse[0] == 1 and mouse_y >= 50:
+       if mouse[0] == 1 and mouse_y >= 60:
           cord.append(mouse_x)
           cord.append(mouse_y)
           if truth:
@@ -272,7 +380,7 @@ while run:
           truth = True
 
     if rect:
-       if mouse[0] == 1 and mouse_y >= 50:
+       if mouse[0] == 1 and mouse_y >= 60:
           screen.blit(surface,(0,0))
           cord.append(mouse_x)
           cord.append(mouse_y)
@@ -281,12 +389,12 @@ while run:
           width = abs(x_2 - x_1)
           height = abs(y_2 - y_1)
           pygame.draw.rect(screen,color,(min(x_1,x_2),min(y_1,y_2),width,height),5)
-       elif mouse[0] == 0:
+       elif mouse[0] == 0 and mouse_y >= 60:
            surface.blit(screen,(0,0))
            cord.clear()
 
     if circle:
-        if mouse[0] == 1 and mouse_y >= 50:
+        if mouse[0] == 1 and mouse_y >= 60:
             screen.blit(surface,(0,0))
             cord.append(mouse_x)
             cord.append(mouse_y)
@@ -294,14 +402,14 @@ while run:
             x_2,y_2 = cord[len(cord) - 2],cord[len(cord) - 1]
             x = (x_1 + x_2) / 2
             y = (y_1 + y_2) / 2
-            radius = abs(x_1 - x_2) / 2
-            pygame.draw.circle(screen,color,(x,y),radius,5)
-        elif mouse[0] == 0:
+            radius_с = abs(x_1 - x_2) / 2
+            pygame.draw.circle(screen,color,(x,y),radius_с,5)
+        elif mouse[0] == 0 and mouse_y >= 60:
             surface.blit(screen,(0,0))
             cord.clear()
 
     if isosceles_triangle:
-        if mouse[0] == 1 and mouse_y >= 50:
+        if mouse[0] == 1 and mouse_y >= 60:
             screen.blit(surface,(0,0))
             cord.append(mouse_x)
             cord.append(mouse_y)
@@ -318,12 +426,12 @@ while run:
                  pygame.draw.line(screen,color,(x_1,y_1),(x_3,y_3),5)
                  pygame.draw.line(screen,color,(x_2,y_2),(x_3,y_3),5)
 
-        elif mouse[0] == 0:
+        elif mouse[0] == 0 and mouse_y >= 60:
             surface.blit(screen,(0,0))
             cord.clear()
 
     if rhombus:
-        if mouse[0] == 1 and mouse_y >= 50:
+        if mouse[0] == 1 and mouse_y >= 60:
             screen.blit(surface,(0,0))
             cord.append(mouse_x)
             cord.append(mouse_y)
@@ -334,12 +442,12 @@ while run:
             x_5,y_5 = x_1,y_2 # нижний угол
             vertices = [(x_1,y_1),(x_3,y_3),(x_5,y_5),(x_4,y_4)]
             pygame.draw.polygon(screen,color,vertices,5)
-        elif mouse[0] == 0:
+        elif mouse[0] == 0 and mouse_y >= 60:
             surface.blit(screen,(0,0))
             cord.clear()
 
     if right_triangle:
-        if mouse[0] == 1 and mouse_y >= 50:
+        if mouse[0] == 1 and mouse_y >= 60:
            screen.blit(surface,(0,0))
            cord.append(mouse_x)
            cord.append(mouse_y)
@@ -349,12 +457,12 @@ while run:
            pygame.draw.line(screen,color,(x_1,y_1),(x_2,y_2),5)
            pygame.draw.line(screen,color,(x_1,y_1),(x_3,y_3),5)
            pygame.draw.line(screen,color,(x_2,y_2),(x_3,y_3),5)
-        elif mouse[0] == 0:
+        elif mouse[0] == 0 and mouse_y >= 60:
             surface.blit(screen,(0,0))
             cord.clear()
     
     if EquilateralTriangle:
-        if mouse[0] == 1 and mouse_y >= 50:
+        if mouse[0] == 1 and mouse_y >= 60:
            screen.blit(surface,(0,0))
            cord.append(mouse_x)
            cord.append(mouse_y)
@@ -382,12 +490,12 @@ while run:
               pygame.draw.line(screen,color,(x_1,y_1),(x_3,y_3),5)
               pygame.draw.line(screen,color,(x_2,y_2),(x_3,y_3),5)
         
-        elif mouse[0] == 0:
+        elif mouse[0] == 0 and mouse_y >= 60:
             surface.blit(screen,(0,0))
             cord.clear()
 
     if square:
-        if mouse[0] == 1 and mouse_y >= 50:
+        if mouse[0] == 1 and mouse_y >= 60:
            screen.blit(surface,(0,0))
            cord.append(mouse_x)
            cord.append(mouse_y)
@@ -396,9 +504,78 @@ while run:
            width = abs(x_2 - x_1)
            height = abs(y_2 - y_1)
            pygame.draw.rect(screen,color,(min(x_1,x_2),min(y_1,y_2),height,height),5)
-        elif mouse[0] == 0:
+        elif mouse[0] == 0 and mouse_y >= 60:
            surface.blit(screen,(0,0))
            cord.clear()
+
+    if RectangularTrapezoid:
+        if mouse[0] == 1 and mouse_y >= 60:
+            screen.blit(surface,(0,0))
+            cord.append(mouse_x)
+            cord.append(mouse_y)
+            x_1,y_1 = cord[0],cord[1]
+            x_2,y_2 = cord[len(cord) - 2],cord[len(cord) - 1]
+            x_3,y_3 = x_1,y_2 # левый нижний угол
+        
+            if x_2 > x_1:
+               x_4,y_4 = x_1 + abs(y_2 - y_1),y_1
+               vertices = [(x_3,y_3),(x_2,y_2),(x_4,y_4),(x_1,y_1)]
+               pygame.draw.polygon(screen,color, vertices,5)
+            elif x_2 < x_1:
+               x_4,y_4 = x_1 - abs(y_2 - y_1),y_1
+               vertices = [(x_3,y_3),(x_2,y_2),(x_4,y_4),(x_1,y_1)]
+               pygame.draw.polygon(screen,color, vertices,5)
+
+        elif mouse[0] == 0 and mouse_y >= 60:
+            surface.blit(screen,(0,0))
+            cord.clear()
+    
+    if pentagon:
+        if mouse[0] ==  1 and mouse_y >= 60:
+            screen.blit(surface,(0,0))
+            cord.append(mouse_x)
+            cord.append(mouse_y)
+            x_1,y_1 = cord[0],cord[1]
+            x_2,y_2 = cord[len(cord) - 2],cord[len(cord) - 1]
+            l = abs(x_2 - x_1)
+            h = (math.tan(54 * math.pi/180) * l)/2
+            c = abs(y_2 - y_1) - h
+            x_3,y_3 = x_1 + l,y_1 + c # правый угол
+            x_4,y_4 = x_1 + l/2,y_2# правый нижний угол
+            x_5,y_5 = x_1 - l/2,y_2 # левый нижний угол
+            x_6,y_6 = x_1 - l, y_1 + c # левый угол
+            vertices = [(x_1,y_1),(x_3,y_3),(x_4,y_4),(x_5,y_5),(x_6,y_6)]
+            pygame.draw.polygon(screen, color, vertices,5)
+        elif mouse[0] == 0 and mouse_y >= 60:
+            surface.blit(screen,(0,0))
+            cord.clear()
+    if clear:
+        #pygame.draw.rect(screen,white,(0,0,700,600))
+        pygame.draw.rect(screen,white,(0,50,700,550))
+        #surface.fill(white)
+    if ellipse:
+        if mouse[0] == 1 and mouse_y >= 60:
+            screen.blit(surface,(0,0))
+            cord.append(mouse_x)
+            cord.append(mouse_y)
+            x_1,y_1 = cord[0],cord[1]
+            x_2,y_2 = cord[len(cord) - 2],cord[len(cord) - 1]
+            d1 =abs(y_2 - y_1)
+            d2 = abs(x_2 - x_1)
+            x = (x_1 + x_2) / 2
+            y = (y_1 + y_2) / 2
+            pygame.draw.ellipse(screen,color,(x,y,d2,d1),5)
+        elif mouse[0] == 0 and mouse_y >= 60:
+            surface.blit(screen,(0,0))
+            cord.clear()
+
+
+            
+
+
+          
+
+        
     
     pygame.display.flip()
 pygame.quit()
