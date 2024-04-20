@@ -103,11 +103,11 @@ while run:
         apple_rect = apple.get_rect(center = (z,t))
         screen.blit(apple,apple_rect)
     
-    if abs(x - z) <= 60 and abs(y - t) <= 62:
+    if abs(x - z) <= 60 and abs(y - t) <= 62:  # при столкновении яблока и змейки
         counter += 1
         if counter % 5 == 0:
-           lev += 1
-           flag = True
+           lev += 1 # уровень увеличивается если число counter делится на 5 а если уровень увеличивается то скорость увеличчивается
+           flag = True #нужен чтобы увеличить скорость снизу его применяем
         once = False
         r,i = z,t
         z,t = random.choice(range(50,840)),random.choice(range(50,640))
@@ -180,12 +180,12 @@ while run:
         pos = (x, y, g,a)
     segments.insert(0, pos) #добавляем на первый индекс потому что голова должна быть нарисована первой 
     
-    for k in range(1, len(segments)):
+    for k in range(1, len(segments)): # нужно для того чтобы следить если змейка врезалась в себя
         if segments[0] == segments[k]:
            game = False
            break
     for segment in segments:
-        pygame.draw.rect(screen, green, (segment[0],segment[1], g, a))
+        pygame.draw.rect(screen, green, (segment[0],segment[1], g, a)) #рисуется змейка
     pygame.display.flip()
     clock.tick(fps)
     
